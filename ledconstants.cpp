@@ -1,4 +1,4 @@
-#include "LightShow.hpp"
+#include "ledconstants.hpp"
 
 void default_setup(CRGB leds[]){
   FastLED.addLeds<WS2812, 2, GRB>(leds, 262);

@@ -1,4 +1,4 @@
-#include "LightShow.hpp"
+#include "ledconstants.hpp"
 
 void sequence_one(CRGB* leds, int delayTime, int thickness, CRGB colorOne, CRGB colorTwo);
 void square_side_cycle(CRGB* leds, int delayTime, CRGB colorOne, CRGB colorTwo, CRGB colorThree, CRGB colorFour);
