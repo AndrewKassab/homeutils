@@ -431,3 +431,62 @@ void trace_square_with_delays(CRGB * leds, int thickness, int delayTrace, int de
   four.traceAllKeepEnd(thickness, delayTrace, reverseTable, colorTwo);
 }
 
+
+void alternate_sides_and_tops_with_alternating_corner_colors(CRGB * leds, int delayTime, CRGB colorOne, CRGB colorTwo){
+  SegmentList squareLeftRight = SegmentList(&get_left_square_left(leds));
+  squareLeftRight.add(&get_left_square_right(leds));
+  squareLeftRight.add(&get_right_square_right(leds));
+  squareLeftRight.add(&get_right_square_left(leds));
+  SegmentList middleSides = SegmentList(&get_middle_left(leds));
+  middleSides.add(&get_middle_right(leds));
+  SegmentList squareTopBottom = SegmentList(&get_left_square_top(leds));
+  squareTopBottom.add(&get_left_square_bottom(leds));
+  squareTopBottom.add(&get_right_square_top(leds));
+  squareTopBottom.add(&get_right_square_bottom(leds));
+  squareLeftRight.setAllToColor(colorOne);
+  // TODO:
+  //light_all_corners(leds, colorTwo);
+  FastLED.show();
+  delay(delayTime);
+  squareLeftRight.turnAllOff();
+  get_middle_top(leds).setToColor(colorTwo);
+  //TODO:
+  //light_all_corners(leds, colorOne);
+  FastLED.show();
+  delay(delayTime);
+  get_middle_top(leds).turnOff();
+  squareTopBottom.setAllToColor(colorTwo);
+  //TODO:
+  //light_all_corners(leds, colorOne);
+  FastLED.show();
+  delay(delayTime);
+  squareTopBottom.turnAllOff();
+  middleSides.setAllToColor(colorOne);
+  // TODO: 
+  //light_all_corners(leds, colorTwo);
+  FastLED.show();
+}
+
+void fade_all_lights_up_in_sets(CRGB * leds, int fadeDelayTime, CRGB colorOne, CRGB colorTwo){
+  SegmentList setOne = SegmentList(&get_left_square_left(leds));
+  setOne.add(&get_left_square_right(leds));
+  setOne.add(&get_right_square_right(leds));
+  setOne.add(&get_right_square_left(leds));
+
+  SegmentList setTwo = SegmentList(&get_left_square_top(leds));
+  setTwo.add(&get_left_square_bottom(leds));
+  setTwo.add(&get_right_square_bottom(leds));
+  setTwo.add(&get_right_square_top(leds));
+
+  SegmentList setThree = SegmentList(&get_middle_left(leds));
+  setThree.add(&get_middle_right(leds));
+
+  SegmentList setFour = SegmentList(&get_middle_top(leds));
+  setFour.add(&get_left_bridge(leds));
+  setFour.add(&get_right_bridge(leds));
+
+  setOne.fadeAllIn(fadeDelayTime, colorOne);
+  setTwo.fadeAllIn(fadeDelayTime, colorTwo);
+  setThree.fadeAllIn(fadeDelayTime, colorOne);
+  setFour.fadeAllIn(fadeDelayTime, colorTwo);
+}
