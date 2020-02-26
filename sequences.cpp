@@ -173,6 +173,7 @@ void sides_to_middle(CRGB * leds, int delayTime, CRGB colorOne, CRGB colorTwo, C
 
 }
 
+// TODO: Fix the unclean transition in the top middle
 void trace_squares_and_middle(CRGB * leds, int delayTime, int thickness, CRGB color){
   LightSegment leftSquare = get_left_square(leds);
   LightSegment rightSquare = get_right_square(leds);
