@@ -469,22 +469,35 @@ void alternate_sides_and_tops_with_alternating_corner_colors(CRGB * leds, int de
 }
 
 void fade_all_lights_up_in_sets(CRGB * leds, int fadeDelayTime, CRGB colorOne, CRGB colorTwo){
-  SegmentList setOne = SegmentList(&get_left_square_left(leds));
-  setOne.add(&get_left_square_right(leds));
-  setOne.add(&get_right_square_right(leds));
-  setOne.add(&get_right_square_left(leds));
+  LightSegment leftSquareLeft = get_left_square_left(leds);
+  LightSegment leftSquareRight = get_left_square_right(leds);
+  LightSegment rightSquareLeft = get_right_square_left(leds);
+  LightSegment rightSquareRight = get_right_square_right(leds);
+  SegmentList setOne = SegmentList(&leftSquareLeft);
+  setOne.add(&leftSquareRight);
+  setOne.add(&rightSquareRight);
+  setOne.add(&rightSquareLeft);
 
-  SegmentList setTwo = SegmentList(&get_left_square_top(leds));
-  setTwo.add(&get_left_square_bottom(leds));
-  setTwo.add(&get_right_square_bottom(leds));
-  setTwo.add(&get_right_square_top(leds));
+  LightSegment leftSquareTop = get_left_square_top(leds);
+  LightSegment leftSquareBottom = get_left_square_bottom(leds);
+  LightSegment rightSquareTop = get_right_square_top(leds);
+  LightSegment rightSquareBottom = get_right_square_bottom(leds);
+  SegmentList setTwo = SegmentList(&leftSquareTop);
+  setTwo.add(&leftSquareBottom);
+  setTwo.add(&rightSquareBottom);
+  setTwo.add(&rightSquareTop);
 
-  SegmentList setThree = SegmentList(&get_middle_left(leds));
-  setThree.add(&get_middle_right(leds));
+  LightSegment middleLeft = get_middle_left(leds);
+  LightSegment middleRight = get_middle_right(leds);
+  SegmentList setThree = SegmentList(&middleLeft);
+  setThree.add(&middleRight);
 
-  SegmentList setFour = SegmentList(&get_middle_top(leds));
-  setFour.add(&get_left_bridge(leds));
-  setFour.add(&get_right_bridge(leds));
+  LightSegment middleTop = get_middle_top(leds);
+  LightSegment rightBridge = get_right_bridge(leds);
+  LightSegment leftBridge = get_left_bridge(leds);
+  SegmentList setFour = SegmentList(&middleTop);
+  setFour.add(&leftBridge);
+  setFour.add(&rightBridge);
 
   setOne.fadeAllIn(fadeDelayTime, colorOne);
   setTwo.fadeAllIn(fadeDelayTime, colorTwo);
