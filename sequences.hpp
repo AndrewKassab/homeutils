@@ -1,6 +1,5 @@
 #include "ledconstants.hpp"
 
-
 void sequence_one(CRGB* leds, int delayTime, int thickness, CRGB colorOne, CRGB colorTwo);
 
 void square_side_cycle(CRGB* leds, int delayTime, CRGB colorOne, CRGB colorTwo, CRGB colorThree, CRGB colorFour);
@@ -42,3 +41,7 @@ void trace_out_from_center(CRGB * leds, int thickness, int delayTime, CRGB color
 void alternate_sides_and_tops_with_alternating_corner_colors(CRGB * leds, int delayTime, CRGB colorOne, CRGB colorTwo);
 
 void fade_all_lights_up_in_sets(CRGB * leds, int fadeDelayTime, CRGB colorOne, CRGB colorTwo);
+
+void squares_top_bottom_dash_left_right(CRGB * leds, int delayTime, CRGB colorOne, CRGB colorTwo);
+
+void squares_left_right_dash_up_down(CRGB * leds, int delayTime, CRGB colorOne, CRGB colorTwo);

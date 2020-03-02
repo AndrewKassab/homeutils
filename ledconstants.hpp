@@ -28,6 +28,8 @@
 
 void default_setup(CRGB leds[]);
 
+void light_all_corners(CRGB * leds, CRGB color);
+
 // Typically used lightSegments 
 LightSegment get_left_square(CRGB* leds);
 LightSegment get_left_square_left(CRGB* leds);
