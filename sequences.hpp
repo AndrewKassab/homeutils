@@ -45,3 +45,5 @@ void fade_all_lights_up_in_sets(CRGB * leds, int fadeDelayTime, CRGB colorOne, C
 void squares_top_bottom_dash_left_right(CRGB * leds, int delayTime, CRGB colorOne, CRGB colorTwo);
 
 void squares_left_right_dash_up_down(CRGB * leds, int delayTime, CRGB colorOne, CRGB colorTwo);
+
+void set_both_squares_to_color(CRGB * leds, CRGB color);
