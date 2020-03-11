@@ -49,3 +49,7 @@ void squares_left_right_dash_up_down(CRGB * leds, int delayTime, CRGB colorOne, 
 void set_both_squares_to_color(CRGB * leds, CRGB color);
 
 void blink_all_lights(CRGB * leds, CRGB color, int delayTime);
+
+void alternate_squares_sides_and_tops(CRGB * leds, int delayTime, CRGB colorOne, CRGB colorTwo);
+
+void switch_between_sets_of_lights(CRGB * leds, int delayTime, CRGB color);
