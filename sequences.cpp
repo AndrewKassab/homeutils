@@ -846,7 +846,6 @@ void alternate_squares_sides_and_tops(CRGB * leds, int delayTime, CRGB colorOne,
   FastLED.show();
 }
 
-// TODO: Turn to double and adjust something_comforting
 void switch_between_sets_of_lights(CRGB * leds, int delayTime, CRGB color){
 
   int set_one[12] = {left_bottom_left_corner, left_top_left_corner, left_bottom_right_corner, left_top_right_corner,
@@ -874,7 +873,7 @@ void switch_between_sets_of_lights(CRGB * leds, int delayTime, CRGB color){
   FastLED.show();
   delay(delayTime);
 
-  for (int i = 0; i < 12; i++){
+  /*for (int i = 0; i < 12; i++){
     leds[set_two[i]] = CRGB::Black;
     leds[set_one[i]] = color;
   }
@@ -888,18 +887,24 @@ void switch_between_sets_of_lights(CRGB * leds, int delayTime, CRGB color){
     }
     leds[set_two[i]] = color;
   }
-  FastLED.show();
+  FastLED.show();*/
 
 }
 
-void square_cycle_speed_up_rainbow(CRGB * leds, int startDelay, int numTimesAtMaxSpeed, int endDelay){
+void square_cycle_speed_up_rainbow(CRGB * leds, int startDelay, int decrement, int numTimesAtMaxSpeed, int endDelay){
+  int mediator = 0;
+  if (decrement % 2 == 0){
+    mediator = decrement / 2;
+  } else {
+    mediator = (decrement - 1)/2;
+  }
   int currDelay = startDelay;
   while (currDelay > endDelay){
     square_side_cycle(leds, currDelay, CRGB::Blue, CRGB::Red, CRGB::Green, CRGB::Gold);
     delay(currDelay);
     square_side_cycle(leds, currDelay, CRGB::Fuchsia, CRGB::Cyan, CRGB::ForestGreen, CRGB::White);
-    delay(currDelay-12);
-    currDelay -= 25;
+    delay(currDelay-mediator);
+    currDelay -= decrement;
   }
   for ( int i = 0; i <= numTimesAtMaxSpeed; i++){
     square_side_cycle(leds, endDelay, CRGB::Blue, CRGB::Red, CRGB::Green, CRGB::Gold);
@@ -907,12 +912,12 @@ void square_cycle_speed_up_rainbow(CRGB * leds, int startDelay, int numTimesAtMa
     square_side_cycle(leds, endDelay, CRGB::Fuchsia, CRGB::Cyan, CRGB::ForestGreen, CRGB::White);
     delay(endDelay);
   }
-  currDelay = endDelay + 25;
+  currDelay = endDelay + decrement;
   while(currDelay < startDelay){
     square_side_cycle(leds, currDelay, CRGB::Blue, CRGB::Red, CRGB::Green, CRGB::Gold);
     delay(currDelay);
     square_side_cycle(leds, currDelay, CRGB::Fuchsia, CRGB::Cyan, CRGB::ForestGreen, CRGB::White);
-    delay(currDelay+12);
-    currDelay += 25;
+    delay(currDelay+mediator);
+    currDelay += decrement;
   }
 }

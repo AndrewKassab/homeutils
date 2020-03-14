@@ -56,4 +56,4 @@ void alternate_squares_sides_and_tops(CRGB * leds, int delayTime, CRGB colorOne,
 
 void switch_between_sets_of_lights(CRGB * leds, int delayTime, CRGB color);
 
-void square_cycle_speed_up_rainbow(CRGB * leds, int startDelay, int numTimesAtMaxSpeed, int endDelay);
+void square_cycle_speed_up_rainbow(CRGB * leds, int startDelay, int decrement, int numTimesAtMaxSpeed, int endDelay);
