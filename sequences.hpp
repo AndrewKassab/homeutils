@@ -50,6 +50,10 @@ void set_both_squares_to_color(CRGB * leds, CRGB color);
 
 void blink_all_lights(CRGB * leds, CRGB color, int delayTime);
 
+void blink_all_lights_with_ending(CRGB * leds, CRGB color, int delayTime);
+
 void alternate_squares_sides_and_tops(CRGB * leds, int delayTime, CRGB colorOne, CRGB colorTwo);
 
 void switch_between_sets_of_lights(CRGB * leds, int delayTime, CRGB color);
+
+void square_cycle_speed_up_rainbow(CRGB * leds, int startDelay, int numTimesAtMaxSpeed, int endDelay);
