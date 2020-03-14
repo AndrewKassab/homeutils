@@ -871,23 +871,6 @@ void switch_between_sets_of_lights(CRGB * leds, int delayTime, CRGB color){
     leds[set_two[i]] = color;
   }
   FastLED.show();
-  delay(delayTime);
-
-  /*for (int i = 0; i < 12; i++){
-    leds[set_two[i]] = CRGB::Black;
-    leds[set_one[i]] = color;
-  }
-  leds[set_two[12]] = CRGB::Black;
-  FastLED.show();
-  delay(delayTime);
-
-  for (int i = 0; i < 13; i++){
-    if (i != 12){
-      leds[set_one[i]] = CRGB::Black;
-    }
-    leds[set_two[i]] = color;
-  }
-  FastLED.show();*/
 
 }
 
