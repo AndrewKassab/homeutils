@@ -838,11 +838,11 @@ void alternate_squares_sides_and_tops(CRGB * leds, int delayTime, CRGB colorOne,
   squaresTopBottom.add(&rightSquareBottom);
   squaresTopBottom.add(&rightSquareTop);
 
-  squareSides.setAllToColor(colorOne);
+  squaresTopBottom.setAllToColor(colorOne);
   FastLED.show();
   delay(delayTime);
-  squareSides.turnAllOff();
-  squaresTopBottom.setAllToColor(colorTwo);
+  squaresTopBottom.turnAllOff();
+  squareSides.setAllToColor(colorTwo);
   FastLED.show();
 }
 
@@ -883,24 +883,152 @@ void square_cycle_speed_up_rainbow(CRGB * leds, int startDelay, int decrement, i
   }
   int currDelay = startDelay;
   while (currDelay > endDelay){
-    square_side_cycle(leds, currDelay, CRGB::Blue, CRGB::Red, CRGB::Green, CRGB::Gold);
+    square_side_cycle(leds, currDelay, CRGB::Blue, CRGB::Green, CRGB::Red, CRGB::Gold);
     delay(currDelay);
     square_side_cycle(leds, currDelay, CRGB::Fuchsia, CRGB::Cyan, CRGB::ForestGreen, CRGB::White);
     delay(currDelay-mediator);
     currDelay -= decrement;
   }
   for ( int i = 0; i <= numTimesAtMaxSpeed; i++){
-    square_side_cycle(leds, endDelay, CRGB::Blue, CRGB::Red, CRGB::Green, CRGB::Gold);
+    square_side_cycle(leds, endDelay, CRGB::Blue, CRGB::Green, CRGB::Red, CRGB::Gold);
     delay(endDelay);
     square_side_cycle(leds, endDelay, CRGB::Fuchsia, CRGB::Cyan, CRGB::ForestGreen, CRGB::White);
     delay(endDelay);
   }
   currDelay = endDelay + decrement;
   while(currDelay < startDelay){
-    square_side_cycle(leds, currDelay, CRGB::Blue, CRGB::Red, CRGB::Green, CRGB::Gold);
+    square_side_cycle(leds, currDelay, CRGB::Blue, CRGB::Green, CRGB::Red, CRGB::Gold);
     delay(currDelay);
     square_side_cycle(leds, currDelay, CRGB::Fuchsia, CRGB::Cyan, CRGB::ForestGreen, CRGB::White);
     delay(currDelay+mediator);
     currDelay += decrement;
   }
+}
+
+void tripple_swap_downwards(CRGB * leds, int delayTime, CRGB colorOne, CRGB colorTwo, CRGB colorThree){
+
+  LightSegment leftLeftTop = LightSegment(leds, left_top_left_corner, left_top_left_corner + 6);
+  LightSegment leftRightTop = LightSegment(leds, left_top_right_corner - 7, left_top_right_corner);
+  LightSegment middleLeftTop = LightSegment(leds, middle_top_left_corner - 6, middle_top_left_corner);
+  LightSegment middleRightTop = LightSegment(leds, middle_top_right_corner, middle_top_right_corner + 6);
+  LightSegment rightLeftTop = LightSegment(leds, right_top_left_corner, right_top_left_corner + 6);
+  LightSegment rightRightTop = LightSegment(leds, right_top_right_corner - 7, right_top_right_corner - 1);
+
+  SegmentList tops = SegmentList(&leftLeftTop);
+  tops.add(&leftRightTop);
+  tops.add(&middleLeftTop);
+  tops.add(&middleRightTop);
+  tops.add(&rightLeftTop);
+  tops.add(&rightRightTop);
+
+  LightSegment leftLeftMiddle = LightSegment(leds, left_top_left_corner + 7, left_top_left_corner + 13);
+  LightSegment leftRightMiddle = LightSegment(leds, left_top_right_corner - 14, left_top_right_corner - 8);
+  LightSegment middleLeftMiddle = LightSegment(leds, middle_top_left_corner - 13, middle_top_left_corner - 7);
+  LightSegment middleRightMiddle = LightSegment(leds, middle_top_right_corner + 7, middle_top_right_corner + 13);
+  LightSegment rightLeftMiddle = LightSegment(leds, right_top_left_corner + 7, right_top_left_corner + 13);
+  LightSegment rightRightMiddle = LightSegment(leds, right_top_right_corner - 14, right_top_right_corner - 8);
+
+  SegmentList middles = SegmentList(&leftLeftMiddle);
+  middles.add(&leftRightMiddle);
+  middles.add(&middleLeftMiddle);
+  middles.add(&middleRightMiddle);
+  middles.add(&rightLeftMiddle);
+  middles.add(&rightRightMiddle);
+
+  LightSegment leftLeftBottom = LightSegment(leds, left_top_left_corner + 14, left_bottom_left_corner);
+  LightSegment leftRightBottom = LightSegment(leds, start, start + 5);
+  LightSegment middleLeftBottom = LightSegment(leds, middle_bottom_left_corner, middle_bottom_left_corner + 6);
+  LightSegment middleRightBottom = LightSegment(leds, middle_bottom_right_corner - 6, middle_bottom_right_corner);
+  LightSegment rightLeftBottom = LightSegment(leds, right_top_left_corner + 14, end);
+  LightSegment rightRightBottom = LightSegment(leds, right_bottom_right_corner, right_bottom_right_corner + 5);
+
+  SegmentList bottoms = SegmentList(&leftLeftBottom);
+  bottoms.add(&leftRightBottom);
+  bottoms.add(&middleLeftBottom);
+  bottoms.add(&middleRightBottom);
+  bottoms.add(&rightLeftBottom);
+  bottoms.add(&rightRightBottom);
+
+  tops.setAllToColor(colorOne);
+  middles.setAllToColor(colorTwo);
+  bottoms.setAllToColor(colorThree);
+  leds[left_bottom_right_corner] = colorThree;
+  FastLED.show();
+  delay(delayTime);
+  tops.setAllToColor(colorThree);
+  middles.setAllToColor(colorOne);
+  bottoms.setAllToColor(colorTwo);
+  leds[left_bottom_right_corner] = colorTwo;
+  FastLED.show();
+  delay(delayTime);
+  tops.setAllToColor(colorTwo);
+  middles.setAllToColor(colorThree);
+  bottoms.setAllToColor(colorOne);
+  leds[left_bottom_right_corner] = colorOne;
+  FastLED.show();
+
+}
+
+void tripple_swap_upwards(CRGB * leds, int delayTime, CRGB colorOne, CRGB colorTwo, CRGB colorThree){
+
+  LightSegment leftLeftTop = LightSegment(leds, left_top_left_corner, left_top_left_corner + 6);
+  LightSegment leftRightTop = LightSegment(leds, left_top_right_corner - 7, left_top_right_corner);
+  LightSegment middleLeftTop = LightSegment(leds, middle_top_left_corner - 6, middle_top_left_corner);
+  LightSegment middleRightTop = LightSegment(leds, middle_top_right_corner, middle_top_right_corner + 6);
+  LightSegment rightLeftTop = LightSegment(leds, right_top_left_corner, right_top_left_corner + 6);
+  LightSegment rightRightTop = LightSegment(leds, right_top_right_corner - 7, right_top_right_corner - 1);
+
+  SegmentList tops = SegmentList(&leftLeftTop);
+  tops.add(&leftRightTop);
+  tops.add(&middleLeftTop);
+  tops.add(&middleRightTop);
+  tops.add(&rightLeftTop);
+  tops.add(&rightRightTop);
+
+  LightSegment leftLeftMiddle = LightSegment(leds, left_top_left_corner + 7, left_top_left_corner + 13);
+  LightSegment leftRightMiddle = LightSegment(leds, left_top_right_corner - 14, left_top_right_corner - 8);
+  LightSegment middleLeftMiddle = LightSegment(leds, middle_top_left_corner - 13, middle_top_left_corner - 7);
+  LightSegment middleRightMiddle = LightSegment(leds, middle_top_right_corner + 7, middle_top_right_corner + 13);
+  LightSegment rightLeftMiddle = LightSegment(leds, right_top_left_corner + 7, right_top_left_corner + 13);
+  LightSegment rightRightMiddle = LightSegment(leds, right_top_right_corner - 14, right_top_right_corner - 8);
+
+  SegmentList middles = SegmentList(&leftLeftMiddle);
+  middles.add(&leftRightMiddle);
+  middles.add(&middleLeftMiddle);
+  middles.add(&middleRightMiddle);
+  middles.add(&rightLeftMiddle);
+  middles.add(&rightRightMiddle);
+
+  LightSegment leftLeftBottom = LightSegment(leds, left_top_left_corner + 14, left_bottom_left_corner);
+  LightSegment leftRightBottom = LightSegment(leds, start, start + 5);
+  LightSegment middleLeftBottom = LightSegment(leds, middle_bottom_left_corner, middle_bottom_left_corner + 6);
+  LightSegment middleRightBottom = LightSegment(leds, middle_bottom_right_corner - 6, middle_bottom_right_corner);
+  LightSegment rightLeftBottom = LightSegment(leds, right_top_left_corner + 14, end);
+  LightSegment rightRightBottom = LightSegment(leds, right_bottom_right_corner, right_bottom_right_corner + 5);
+
+  SegmentList bottoms = SegmentList(&leftLeftBottom);
+  bottoms.add(&leftRightBottom);
+  bottoms.add(&middleLeftBottom);
+  bottoms.add(&middleRightBottom);
+  bottoms.add(&rightLeftBottom);
+  bottoms.add(&rightRightBottom);
+
+  tops.setAllToColor(colorOne);
+  middles.setAllToColor(colorTwo);
+  bottoms.setAllToColor(colorThree);
+  leds[left_bottom_right_corner] = colorThree;
+  FastLED.show();
+  delay(delayTime);
+  tops.setAllToColor(colorTwo);
+  middles.setAllToColor(colorThree);
+  bottoms.setAllToColor(colorOne);
+  leds[left_bottom_right_corner] = colorOne;
+  FastLED.show();
+  delay(delayTime);
+  tops.setAllToColor(colorThree);
+  middles.setAllToColor(colorOne);
+  bottoms.setAllToColor(colorTwo);
+  leds[left_bottom_right_corner] = colorTwo;
+  FastLED.show();
+
 }
