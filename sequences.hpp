@@ -28,6 +28,8 @@ void corners_cycle_towards_center(CRGB * leds, int delayTime, CRGB colorOne, CRG
 
 void color_trace_to_center(CRGB * leds, int delayTime, CRGB color);
 
+void trace_bridges_to_center(CRGB * leds, int thickness, int delayTime, CRGB color);
+
 void color_trace_outwards_from_center(CRGB * leds, int delayTime, CRGB color);
 
 void color_trace_bridges_to_center(CRGB * leds, int delayTime, CRGB color);
@@ -44,11 +46,17 @@ void fade_all_lights_up_in_sets(CRGB * leds, int fadeDelayTime, CRGB colorOne, C
 
 void squares_top_bottom_dash_left_right(CRGB * leds, int delayTime, CRGB colorOne, CRGB colorTwo);
 
+void top_bottom_dash_left_right(CRGB * leds, int delayTime, CRGB colorOne, CRGB colorTwo);
+
 void squares_left_right_dash_up_down(CRGB * leds, int delayTime, CRGB colorOne, CRGB colorTwo);
+
+void left_right_dash_up_down(CRGB * leds, int delayTime, CRGB colorOne, CRGB colorTwo);
 
 void set_both_squares_to_color(CRGB * leds, CRGB color);
 
 void blink_all_lights(CRGB * leds, CRGB color, int delayTime);
+
+void blink_squares_lights(CRGB * leds, CRGB color, int delayTime);
 
 void blink_all_lights_with_ending(CRGB * leds, CRGB color, int delayTime);
 
